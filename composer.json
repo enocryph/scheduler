@@ -1,0 +1,11 @@
+{
+  "require": {
+    "guzzlehttp/guzzle": "^6.3",
+    "vlucas/phpdotenv": "^2.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Scheduler\\": "src/"
+    }
+  }
+}
