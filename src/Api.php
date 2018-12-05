@@ -7,18 +7,38 @@ use GuzzleHttp\Client;
 use Scheduler\Interfaces\ApiInterface;
 use Scheduler\Interfaces\ApplicationInterface;
 
+/**
+ * Class Api
+ * @package Scheduler
+ */
 class Api implements ApiInterface
 {
+    /**
+     * @var Client
+     */
     private $client;
 
+    /**
+     * @var Config
+     */
     private $config;
 
+    /**
+     * Api constructor.
+     * @param Client $client
+     * @param Config $config
+     */
     public function __construct(Client $client, Config $config)
     {
         $this->client = $client;
         $this->config = $config;
     }
 
+    /**
+     * @param ApplicationInterface $application
+     * @return array
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function getRunTimes(ApplicationInterface $application): array
     {
         $endpoint = $this->config->getParameter('RUNTIME_ENDPOINT');
