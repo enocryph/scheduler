@@ -23,10 +23,12 @@ interface ApplicationInterface
      */
     public function getApplicationId(): int;
 
+
     /**
+     * @param bool $ignoreCached
      * @return array
      */
-    public function getSchedule(): array;
+    public function getSchedule(bool $ignoreCached): array;
 
     /**
      * @param int $numberOfChecks

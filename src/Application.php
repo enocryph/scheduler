@@ -27,9 +27,13 @@ class Application implements ApplicationInterface
         return $this->applicationId;
     }
 
-    public function getSchedule(): array
+    public function getSchedule(bool $ignoreCached): array
     {
-        $runtime = $this->repository->retrieve($this);
+        $runtime = null;
+
+        if (!$ignoreCached) {
+            $runtime = $this->repository->retrieve($this);
+        }
 
         if (is_null($runtime)) {
             $runtime = $this->api->getRunTimes($this);
