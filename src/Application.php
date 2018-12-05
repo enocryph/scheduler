@@ -27,7 +27,7 @@ class Application implements ApplicationInterface
         return $this->applicationId;
     }
 
-    public function getSchedule(bool $ignoreCached): array
+    public function getSchedule(bool $ignoreCached = false): array
     {
         $runtime = null;
 
@@ -36,15 +36,31 @@ class Application implements ApplicationInterface
         }
 
         if (is_null($runtime)) {
-            $runtime = $this->api->getRunTimes($this);
+            $this->loadSchedule();
+            $runtime = $this->repository->retrieve($this);
         }
 
         return $runtime;
     }
 
+    public function loadSchedule(bool $ignoreCached = true): void
+    {
+        if ($ignoreCached) {
+            $this->repository->store($this, $this->api->getRunTimes($this));
+        } elseif (empty($this->repository->retrieve($this))) {
+            $this->repository->store($this, $this->api->getRunTimes($this));
+        }
+    }
+
     public function getNextChecks(int $numberOfChecks = 1): array
     {
         // TODO: Implement getNextChecks() method.
+    }
+
+    public function __debugInfo()
+    {
+        $result = ['applicationId' => $this->applicationId];
+        return $result;
     }
 
 }
