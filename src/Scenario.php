@@ -47,13 +47,6 @@ class Scenario
             return $app->getApplicationId();
         }, $apps)]);
 
-        foreach ($apps as $application) {
-//            $logger->info("Application {$application->getApplicationId()}", ['schedule' => $application->getSchedule()]);
-            if (!in_array(930, $application->getSchedule())) {
-                $logger->error("930 not found in application {$application->getApplicationId()}");
-            }
-        }
-
         $appsToReload = array_slice($scheduler->getScheduledApplications(), 0, 100);
         $logger->info("Updating schedule for first 100 apps");
         $scheduler->updateScheduleForApplications($appsToReload, true);
@@ -65,13 +58,6 @@ class Scenario
             return $app->getApplicationId();
         }, $apps)]);
 
-        foreach ($apps as $application) {
-//            $logger->info("Application {$application->getApplicationId()}", ['schedule' => $application->getSchedule()]);
-            if (!in_array(930, $application->getSchedule())) {
-                $logger->error("930 not found in application {$application->getApplicationId()}");
-            }
-        }
-
         $logger->info("Removing application with id 191");
         $application191 = $scheduler->getApplicationById(191);
         $scheduler->removeScheduledApplication($application191);
@@ -82,13 +68,6 @@ class Scenario
         $logger->info("Applications scheduled for 05:07", ['apps' => array_map(function (ApplicationInterface $app) {
             return $app->getApplicationId();
         }, $apps)]);
-
-        foreach ($apps as $application) {
-//            $logger->info("Application {$application->getApplicationId()}", ['schedule' => $application->getSchedule()]);
-            if (!in_array(307, $application->getSchedule())) {
-                $logger->error("307 not found in application {$application->getApplicationId()}");
-            }
-        }
 
         $scheduler->scheduleApplication($application191, false);
 
