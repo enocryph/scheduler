@@ -6,7 +6,7 @@
 4. Run with `php console/application.php`
 
 ```bash
-mv .env.example .env
+cp .env.example .env
 
 composer install
 
