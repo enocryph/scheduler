@@ -53,8 +53,7 @@ class Scheduler implements SchedulerInterface
      */
     public function getScheduledApplicationsForTime(\DateTime $time): array
     {
-        $timezone = new \DateTimeZone('UTC');
-        $today = new \DateTime(gmdate("Y-m-d"), $timezone);
+        $today = new \DateTime(date("Y-m-d"));
         $minutes = ($time->getTimestamp() - $today->getTimestamp()) / 60;
 
         $applications = [];

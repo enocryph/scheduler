@@ -88,9 +88,8 @@ class Application implements ApplicationInterface
     public function getNextChecks(int $numberOfChecks = 1): array
     {
         $schedule = $this->getSchedule();
-        $timezone = new \DateTimeZone('UTC');
-        $today = new \DateTime(gmdate("Y-m-d"), $timezone);
-        $time = new \DateTime(gmdate("Y-m-d H:i:s"), $timezone);
+        $today = new \DateTime(date("Y-m-d"));
+        $time = new \DateTime("now");
         $minutes = ($time->getTimestamp() - $today->getTimestamp()) / 60;
         $counter = 0;
         $result = [];
