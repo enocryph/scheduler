@@ -20,8 +20,13 @@ class Scenario
     public function run()
     {
         $logger = new Logger('runtime');
-        unlink(__DIR__ . '/../logs/runtime.log');
-        $logger->pushHandler(new StreamHandler(__DIR__ . '/../logs/runtime.log'));
+
+        $logFilename = __DIR__ . '/../logs/runtime.log';
+        if (file_exists($logFilename)) {
+            unlink($logFilename);
+        }
+
+        $logger->pushHandler(new StreamHandler($logFilename));
         $logger->pushHandler(new StreamHandler("php://stdout"));
 
         $applicationIds = range(1, 200);
